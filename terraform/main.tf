@@ -1,26 +1,26 @@
 module "vpc" {
  source = "./module/vpc"
- cidr_block = "192.168.0.0/16"
+ cidr_block = local.vpc_cidr_block
  name = "${local.servicename}-vpc"
 }
 
 module "subnet" {
  source = "./module/subnet"
- cidr_block = "192.168.1.0/24"
+ cidr_block = local.subnet_cidr_block
  vpc_id = module.vpc.vpc_id
  name = "${local.servicename}-subnet"
 }
 
 module "db_subnet_1" {
  source = "./module/subnet"
- cidr_block = "192.168.2.0/24"
+ cidr_block = local.db_subnet_1_cidr_block
  vpc_id = module.vpc.vpc_id
  name = "${local.servicename}-db-1-subnet"
 }
 
 module "db_subnet_2" {
  source = "./module/subnet"
- cidr_block = "192.168.3.0/24"
+ cidr_block = local.db_subnet_2_cidr_block
  availability_zone = local.az_region_2
  vpc_id = module.vpc.vpc_id
  name = "${local.servicename}-db-2-subnet"
