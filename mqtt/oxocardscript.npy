@@ -1,0 +1,20 @@
+uri = "mqtt://xxxx" # xxxx durch IP des MQTT Brokers ersetzen
+username = "xxxx" # Durch Username ersetzen oder leer lassen falls es keinen gibt
+password = "xxxx" # Durch PW ersetzen oder leer lassen falls es keines gibt
+
+subscribeTopic = "xxxx" # Name eines Topics angeben
+publishTopic = subscribeTopic
+x = 10
+
+if connectMQTT(uri, username, password):
+    subscribeMQTT(subscribeTopic)
+    while x>9:
+        publishData = getMicrophoneDecibel()
+        publishMQTT(publishTopic, publishData)
+        delay(1000)
+        clear()
+        drawText(50, 50, publishData)
+        update()
+else:
+    drawText(10, 55, "CONNECT FAIL!")
+    update()
